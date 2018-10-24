@@ -102,7 +102,8 @@ public class Reportes extends HttpServlet {
              if (   plantilla.contains("LibroVentas.jrxml") || 
                     plantilla.contains("LibroVentasOriginal.jrxml") ||
                     plantilla.contains("LibroCompras.jrxml") || 
-                    plantilla.contains("LibroComprasOriginal.jrxml")
+                    plantilla.contains("LibroComprasOriginal.jrxml") || 
+                    plantilla.contains("RetencionesRecibidas.jrxml")
                 ) {
                  parameters.put("cliente_id", Integer.valueOf(cliente_id));
                  parameters.put("mes", Integer.valueOf(mes));
@@ -111,7 +112,8 @@ public class Reportes extends HttpServlet {
              
              if ( plantilla.contains("LibroMayor.jrxml" ) || 
                     plantilla.contains("BalanceAnalitico.jrxml") ||
-                    plantilla.contains("ResultadoAnalitico.jrxml")                      
+                    plantilla.contains("ResultadoAnalitico.jrxml") ||
+                    plantilla.contains("LibroDiario.jrxml")
                 ) {
                  parameters.put("cliente_id", Integer.valueOf(cliente_id));                 
                  parameters.put("ano", Integer.valueOf(ano));
