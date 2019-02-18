@@ -68,7 +68,7 @@ public class Reportes extends HttpServlet {
         
         if (plantilla!=null && plantilla.trim().length()>0) {
             /*PREPARO LA PLANTILLA*/
-        String path_reporte = "/jasper_plantillas/" + plantilla;
+        String path_reporte = "/opt/tomcat7/webapps/jasper_plantillas/" + plantilla;
         //String path_reporte = "C:\\jasper_plantillas\\" + plantilla;
         /*VERIFICO QUE FORMATO SE REQUIERE, PDF o EXCEL...*/
         if (archivo_nombre.contains(".pdf")) {
