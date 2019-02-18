@@ -54,16 +54,22 @@ public class Reportes extends HttpServlet {
         String archivo_nombre = request.getParameter("archivo_nombre");
         String mes=request.getParameter("mes");//A PARTIR DE ESTE PARAMETRO LOS USO PARA EL JASPER
         String ano=request.getParameter("ano");
-        String cliente_id=request.getParameter("cliente_id");
+        String dia=request.getParameter("dia");
+        String cliente_id=request.getParameter("cliente_id");        
         String id_factura=request.getParameter("id_factura");
+        String id_documento=request.getParameter("id_documento");
+        String user=request.getParameter("user_id");
         
+        System.out.println(dia);
         System.out.println(mes);
         System.out.println(ano);
         System.out.println(cliente_id);
+        System.out.println(user);
         
         if (plantilla!=null && plantilla.trim().length()>0) {
             /*PREPARO LA PLANTILLA*/
-        String path_reporte = "C:\\jasper_plantillas\\" + plantilla;
+        String path_reporte = "/jasper_plantillas/" + plantilla;
+        //String path_reporte = "C:\\jasper_plantillas\\" + plantilla;
         /*VERIFICO QUE FORMATO SE REQUIERE, PDF o EXCEL...*/
         if (archivo_nombre.contains(".pdf")) {
             response.setHeader("Content-Disposition", "inline; filename=\"" + archivo_nombre + "\"");
@@ -79,12 +85,12 @@ public class Reportes extends HttpServlet {
             Connection con;
 
             //String host = "jdbc:mysql://localhost:3306/estucont";
-            String host = "jdbc:mysql://localhost:3306/estucont?autoReconnect=true&useSSL=false";
+            String host = "jdbc:mysql://157.230.129.190:3306/estucont?autoReconnect=true&useSSL=false";
             //String host = "jdbc:postgresql://localhost:5432/simons";
             //String uname = "root";
             //String upass = "";
-            String uname = "root";
-            String upass = null;
+            String uname = "rodrigo";
+            String upass = "simons";
 
             Class.forName("com.mysql.jdbc.Driver");
             //Class.forName("org.postgresql.Driver");
@@ -103,6 +109,8 @@ public class Reportes extends HttpServlet {
                     plantilla.contains("LibroVentasOriginal.jrxml") ||
                     plantilla.contains("LibroCompras.jrxml") || 
                     plantilla.contains("LibroComprasOriginal.jrxml") || 
+                    plantilla.contains("LibroEgresos.jrxml") || 
+                    plantilla.contains("LibroIngresos.jrxml") || 
                     plantilla.contains("RetencionesRecibidas.jrxml")
                 ) {
                  parameters.put("cliente_id", Integer.valueOf(cliente_id));
@@ -111,7 +119,8 @@ public class Reportes extends HttpServlet {
              }
              
              if ( plantilla.contains("LibroMayor.jrxml" ) || 
-                    plantilla.contains("BalanceAnalitico.jrxml") ||
+                    plantilla.contains("ResumenIRPC.jrxml") ||
+                     plantilla.contains("BalanceAnalitico.jrxml") ||
                     plantilla.contains("ResultadoAnalitico.jrxml") ||
                     plantilla.contains("LibroDiario.jrxml")
                 ) {
@@ -128,8 +137,18 @@ public class Reportes extends HttpServlet {
                  parameters.put("mes", Integer.valueOf(mes));
                  parameters.put("ano", Integer.valueOf(ano));
              }
-                                            
-            
+             
+             if (plantilla.contains("ResumenCaja.jrxml")) {                 
+                 parameters.put("mes", Integer.valueOf(mes));
+                 parameters.put("ano", Integer.valueOf(ano));  
+                 parameters.put("dia", Integer.valueOf(dia));
+                 parameters.put("user", Integer.valueOf(user));  
+             }
+             
+             if (plantilla.contains("Recibo.jrxml")) {                 
+                 parameters.put("id_documento", Integer.valueOf(id_documento)); 
+             }
+                                                        
             JasperPrint jasperPrint = JasperFillManager.fillReport(jr, parameters, con);
 
             //JasperExportManager.exportReportToPdfFile(jasperPrint, "application.pdf");
