@@ -85,7 +85,7 @@ public class Reportes extends HttpServlet {
             Connection con;
 
             //String host = "jdbc:mysql://localhost:3306/estucont";
-            String host = "jdbc:mysql://157.230.129.190:3306/estucont?autoReconnect=true&useSSL=false";
+            String host = "jdbc:mysql://138.197.220.164:3306/estucont?autoReconnect=true&useSSL=false";
             //String host = "jdbc:postgresql://localhost:5432/simons";
             //String uname = "root";
             //String upass = "";
