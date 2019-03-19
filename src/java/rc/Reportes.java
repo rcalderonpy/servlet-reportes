@@ -68,8 +68,8 @@ public class Reportes extends HttpServlet {
         
         if (plantilla!=null && plantilla.trim().length()>0) {
             /*PREPARO LA PLANTILLA*/
-        String path_reporte = "/opt/tomcat7/webapps/jasper_plantillas/" + plantilla;
-        //String path_reporte = "C:\\jasper_plantillas\\" + plantilla;
+        //String path_reporte = "/opt/tomcat7/webapps/jasper_plantillas/" + plantilla;
+        String path_reporte = "C:\\jasper_plantillas\\" + plantilla;
         /*VERIFICO QUE FORMATO SE REQUIERE, PDF o EXCEL...*/
         if (archivo_nombre.contains(".pdf")) {
             response.setHeader("Content-Disposition", "inline; filename=\"" + archivo_nombre + "\"");
@@ -83,14 +83,16 @@ public class Reportes extends HttpServlet {
         /*CONECTO CON LA BASE DE DATOS*/
         try {
             Connection con;
-
-            //String host = "jdbc:mysql://localhost:3306/estucont";
-            String host = "jdbc:mysql://138.197.220.164:3306/estucont?autoReconnect=true&useSSL=false";
+            
             //String host = "jdbc:postgresql://localhost:5432/simons";
-            //String uname = "root";
-            //String upass = "";
-            String uname = "rodrigo";
-            String upass = "simons";
+
+            String host = "jdbc:mysql://localhost:3306/estucont?autoReconnect=true&useSSL=false";                       
+            String uname = "root";
+            String upass = "simons123";
+            
+            //String host = "jdbc:mysql://138.197.220.164:3306/estucont?autoReconnect=true&useSSL=false";           
+            //String uname = "rodrigo";
+            //String upass = "simons";
 
             Class.forName("com.mysql.jdbc.Driver");
             //Class.forName("org.postgresql.Driver");
@@ -111,7 +113,9 @@ public class Reportes extends HttpServlet {
                     plantilla.contains("LibroComprasOriginal.jrxml") || 
                     plantilla.contains("LibroEgresos.jrxml") || 
                     plantilla.contains("LibroIngresos.jrxml") || 
-                    plantilla.contains("RetencionesRecibidas.jrxml")
+                    plantilla.contains("RetencionesRecibidas.jrxml")|| 
+                    plantilla.contains("reciboCobro.jrxml")|| 
+                    plantilla.contains("reciboPago.jrxml")
                 ) {
                  parameters.put("cliente_id", Integer.valueOf(cliente_id));
                  parameters.put("mes", Integer.valueOf(mes));
