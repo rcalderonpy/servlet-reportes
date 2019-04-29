@@ -53,8 +53,9 @@ public class Reportes extends HttpServlet {
         String plantilla = request.getParameter("plantilla"); //Ej. simons.jrxml
         String archivo_nombre = request.getParameter("archivo_nombre");
         String mes=request.getParameter("mes");//A PARTIR DE ESTE PARAMETRO LOS USO PARA EL JASPER
-        String ano=request.getParameter("ano");
         String dia=request.getParameter("dia");
+        String ano=request.getParameter("ano");
+        String fecha=request.getParameter("fecha");
         String cliente_id=request.getParameter("cliente_id");        
         String id_factura=request.getParameter("id_factura");
         String id_documento=request.getParameter("id_documento");
@@ -130,6 +131,13 @@ public class Reportes extends HttpServlet {
                 ) {
                  parameters.put("cliente_id", Integer.valueOf(cliente_id));                 
                  parameters.put("ano", Integer.valueOf(ano));
+             }
+             
+             if ( plantilla.contains("ListadoClientes.jrxml" ) || 
+                    plantilla.contains("ListadoProveedores.jrxml")
+                ) {
+                 parameters.put("cliente_id", Integer.valueOf(cliente_id));                 
+                 parameters.put("fecha", fecha);
              }
              
              if (plantilla.contains("Factura.jrxml")) {                 
