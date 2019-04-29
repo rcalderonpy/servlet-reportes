@@ -160,7 +160,15 @@ public class Reportes extends HttpServlet {
              if (plantilla.contains("Recibo.jrxml")) {                 
                  parameters.put("id_documento", Integer.valueOf(id_documento)); 
              }
-                                                        
+                 
+             if (plantilla.contains("EstadoCuentaCliente.jrxml") ||
+                 plantilla.contains("EstadoCuentaProveedor.jrxml")) {   
+                 parameters.put("fecha", fecha);
+                 parameters.put("cliente_id", Integer.valueOf(cliente_id));
+                 parameters.put("id_documento", Integer.valueOf(id_documento)); 
+             }
+             
+             
             JasperPrint jasperPrint = JasperFillManager.fillReport(jr, parameters, con);
 
             //JasperExportManager.exportReportToPdfFile(jasperPrint, "application.pdf");
