@@ -66,6 +66,8 @@ public class Reportes extends HttpServlet {
         System.out.println(ano);
         System.out.println(cliente_id);
         System.out.println(user);
+        System.out.println(fecha);
+        System.out.println(id_documento);
         
         if (plantilla!=null && plantilla.trim().length()>0) {
             /*PREPARO LA PLANTILLA*/
@@ -162,7 +164,9 @@ public class Reportes extends HttpServlet {
              }
                  
              if (plantilla.contains("EstadoCuentaCliente.jrxml") ||
-                 plantilla.contains("EstadoCuentaProveedor.jrxml")) {   
+                 plantilla.contains("EstadoCuentaProveedor.jrxml") ||
+                 plantilla.contains("EstadoCuentaClienteFecha.jrxml") ||
+                 plantilla.contains("EstadoCuentaProveedorFecha.jrxml")) {   
                  parameters.put("fecha", fecha);
                  parameters.put("cliente_id", Integer.valueOf(cliente_id));
                  parameters.put("id_documento", Integer.valueOf(id_documento)); 
