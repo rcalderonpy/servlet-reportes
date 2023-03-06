@@ -107,17 +107,6 @@ public class Reportes extends HttpServlet {
         try {
             Connection con;
             
-            //String host = "jdbc:postgresql://localhost:5432/simons";
-
-            // pc desarrollo Hector Torres
-            // String host = "jdbc:mysql://172.17.0.1:3306/estucont?autoReconnect=true";
-            // String uname = "root";
-            // String upass = "Simons123";
-            
-            //String host = "jdbc:mysql://mysql-produccion-do-user-4813949-0.b.db.ondigitalocean.com:25060/estucont?autoReconnect=true&useSSL=TRUE";                       
-            // producción       
-            //String host = "jdbc:mysql://do-mysql-prod-do-user-4813949-0.b.db.ondigitalocean.com:25060/estucont?autoReconnect=true&useSSL=TRUE";
-            
             String host = "";
             String uname = System.getenv("DATABASE_USER");
             String upass = System.getenv("DATABASE_PASSWORD");;
